@@ -1,0 +1,56 @@
+.feedback-form,
+.feedback-action {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea,
+.feedback-action select,
+.feedback-action textarea {
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+}
+.feedback-form .field,
+.feedback-action .field {
+  margin: 10px 0;
+}
+.feedback-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.feedback-detail > div {
+  display: grid;
+  gap: 5px;
+}
+.feedback-detail small {
+  color: var(--muted);
+}
+.feedback-action {
+  margin-top: 16px;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.feedback-closed {
+  background: #f1f2f2;
+  color: #66706d;
+}
+.feedback-in_progress {
+  background: #fff6df;
+  color: #8b6517;
+}
+@media (max-width: 700px) {
+  .feedback-form,
+  .feedback-action,
+  .feedback-detail {
+    grid-template-columns: 1fr;
+  }
+  .full-field {
+    grid-column: auto;
+  }
+}
