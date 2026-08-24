@@ -1,0 +1,69 @@
+.claim-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.claim-form input,
+.claim-form select,
+.claim-form textarea,
+.status-form select {
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+}
+.claim-form .field {
+  margin: 10px 0;
+}
+.claim-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.claim-detail > div {
+  display: grid;
+  gap: 5px;
+}
+.claim-detail small {
+  color: var(--muted);
+}
+.claim-detail strong {
+  font-size: 17px;
+}
+.claim-detail span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.status-form {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+.claim-rejected,
+.claim-cancelled {
+  background: #fff0ef;
+  color: #a63d35;
+}
+.claim-approved,
+.claim-paid {
+  background: #e8f7ef;
+  color: #14704f;
+}
+.claim-under_review {
+  background: #fff6df;
+  color: #8b6517;
+}
+@media (max-width: 700px) {
+  .claim-form,
+  .claim-detail {
+    grid-template-columns: 1fr;
+  }
+  .status-form {
+    grid-template-columns: 1fr;
+  }
+  .full-field {
+    grid-column: auto;
+  }
+}
