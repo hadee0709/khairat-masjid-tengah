@@ -96,6 +96,10 @@ export default async function Dashboard() {
             <Settings size={19} />
             <span>Laporan & Analitik</span>
           </Link>
+          <Link href="/settings">
+            <Settings size={19} />
+            <span>Konfigurasi</span>
+          </Link>
         </nav>
         <div className="side-foot">
           <form action={logout}>
