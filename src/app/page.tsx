@@ -80,10 +80,10 @@ export default async function Dashboard() {
             <ReceiptText size={19} />
             <span>Yuran & Ledger</span>
           </Link>
-          <a href="#maklumbalas">
+          <Link href="/claims">
             <MessageSquare size={19} />
-            <span>Maklum Balas</span>
-          </a>
+            <span>Tuntutan Khairat</span>
+          </Link>
           <Link href="/dependents">
             <UserRoundSearch size={19} />
             <span>Tanggungan Ahli</span>
