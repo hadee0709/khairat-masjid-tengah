@@ -84,9 +84,9 @@ export default async function Dashboard() {
             <MessageSquare size={19} />
             <span>Maklum Balas</span>
           </a>
-          <Link href="/members">
+          <Link href="/dependents">
             <UserRoundSearch size={19} />
-            <span>Direktori Ahli</span>
+            <span>Tanggungan Ahli</span>
           </Link>
           <a href="#pengguna">
             <ShieldCheck size={19} />
