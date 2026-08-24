@@ -16,6 +16,7 @@ const money = new Intl.NumberFormat("ms-MY", {
   currency: "MYR",
 });
 export default async function Dashboard() {
+  const currentYear = new Date().getFullYear();
   const s = await createClient(),
     {
       data: { user },
@@ -36,7 +37,7 @@ export default async function Dashboard() {
       .from("payments")
       .select("amount,paid_on")
       .is("voided_at", null)
-      .eq("fee_year", new Date().getFullYear()),
+      .eq("fee_year", currentYear),
     s
       .from("feedback")
       .select("*", { count: "exact", head: true })
@@ -49,8 +50,13 @@ export default async function Dashboard() {
       .order("created_at", { ascending: false })
       .limit(5),
   ]);
-  const total = (payments || []).reduce((n, p) => n + Number(p.amount), 0),
-    bars = [38, 56, 45, 72, 62, 84, 68, 90, 74, 82, 65, 42];
+  const monthly = Array.from({ length: 12 }, () => 0);
+  for (const payment of payments || []) {
+    const month = new Date(payment.paid_on + "T00:00:00").getMonth();
+    if (month >= 0 && month < 12) monthly[month] += Number(payment.amount);
+  }
+  const total = monthly.reduce((sum, amount) => sum + amount, 0);
+  const highestMonth = Math.max(...monthly, 1);
   return (
       <main className="main">
         <header className="top">
@@ -114,12 +120,12 @@ export default async function Dashboard() {
           <div className="card">
             <div className="card-head">
               <h2>Trend kutipan bulanan</h2>
-              <span>{new Date().getFullYear()}</span>
+              <span>{currentYear}</span>
             </div>
             <div className="bars">
-              {bars.map((h, i) => (
+              {monthly.map((amount, i) => (
                 <div className="bar-group" key={i}>
-                  <div className="bar" style={{ height: `${h}%` }} />
+                  <div className="bar" title={money.format(amount)} style={{ height: Math.max(amount ? 8 : 2, (amount / highestMonth) * 100) + "%" }} />
                   <span>
                     {
                       [
