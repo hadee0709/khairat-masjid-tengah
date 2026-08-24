@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, ClipboardCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { updateClaimStatus } from "../actions";
+import { uploadClaimDocument } from "../documents/actions";
 const money = new Intl.NumberFormat("ms-MY", {
     style: "currency",
     currency: "MYR",
@@ -29,13 +30,20 @@ export default async function Page({
       data: { user },
     } = await s.auth.getUser();
   if (!user) redirect("/login");
-  const { data: c } = await s
-    .from("claims")
-    .select(
-      "*,members(member_no,full_name,phone),dependents(full_name,relationship)",
-    )
-    .eq("id", id)
-    .single();
+  const [{ data: c }, { data: documents }] = await Promise.all([
+    s
+      .from("claims")
+      .select(
+        "*,members(member_no,full_name,phone),dependents(full_name,relationship)",
+      )
+      .eq("id", id)
+      .single(),
+    s
+      .from("claim_documents")
+      .select("id,file_name,mime_type,file_size,document_type,created_at")
+      .eq("claim_id", id)
+      .order("created_at", { ascending: false }),
+  ]);
   if (!c) notFound();
   return (
     <main className="module-page">
@@ -95,6 +103,56 @@ export default async function Page({
           </select>
           <button className="btn-inline">Kemas Kini Status</button>
         </form>
+        <section className="card documents-card">
+          <div className="card-head">
+            <div>
+              <h2>Dokumen & Lampiran</h2>
+              <p>PDF atau imej, maksimum 10 MB setiap fail.</p>
+            </div>
+            <span>{documents?.length || 0} fail</span>
+          </div>
+          <form action={uploadClaimDocument} className="document-upload">
+            <input type="hidden" name="claim_id" value={id} />
+            <select name="document_type" defaultValue="supporting">
+              <option value="death_certificate">Sijil berkaitan</option>
+              <option value="identification">Dokumen pengenalan</option>
+              <option value="payment_proof">Bukti bayaran</option>
+              <option value="application_form">Borang permohonan</option>
+              <option value="supporting">Dokumen sokongan</option>
+              <option value="other">Lain-lain</option>
+            </select>
+            <input
+              name="file"
+              type="file"
+              accept="application/pdf,image/jpeg,image/png,image/webp"
+              required
+            />
+            <button className="btn-inline">Muat Naik</button>
+          </form>
+          {documents?.length ? (
+            <div className="document-list">
+              {documents.map((d: any) => (
+                <a
+                  key={d.id}
+                  href={`/claims/documents/${d.id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div>
+                    <strong>{d.file_name}</strong>
+                    <small>
+                      {d.document_type.replaceAll("_", " ")} ·{" "}
+                      {(Number(d.file_size) / 1024).toFixed(1)} KB
+                    </small>
+                  </div>
+                  <span>Lihat / Muat Turun</span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div className="empty">Belum ada dokumen dilampirkan.</div>
+          )}
+        </section>
       </div>
     </main>
   );
