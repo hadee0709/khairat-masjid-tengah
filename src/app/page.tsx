@@ -104,6 +104,10 @@ export default async function Dashboard() {
             <Settings size={19} />
             <span>Konfigurasi</span>
           </Link>
+          <Link href="/audit">
+            <ShieldCheck size={19} />
+            <span>Audit Trail</span>
+          </Link>
         </nav>
         <div className="side-foot">
           <form action={logout}>
