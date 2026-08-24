@@ -88,10 +88,10 @@ export default async function Dashboard() {
             <UserRoundSearch size={19} />
             <span>Tanggungan Ahli</span>
           </Link>
-          <a href="#pengguna">
+          <Link href="/users">
             <ShieldCheck size={19} />
             <span>Pengguna Sistem</span>
-          </a>
+          </Link>
           <Link href="/reports">
             <Settings size={19} />
             <span>Laporan & Analitik</span>
