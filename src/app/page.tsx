@@ -80,6 +80,10 @@ export default async function Dashboard() {
             <UserRoundSearch size={19} />
             <span>Portal Ahli</span>
           </Link>
+          <Link href="/notifications">
+            <MessageSquare size={19} />
+            <span>Notifikasi</span>
+          </Link>
           <Link href="/payments">
             <ReceiptText size={19} />
             <span>Yuran & Ledger</span>
