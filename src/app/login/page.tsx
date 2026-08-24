@@ -1,2 +1,40 @@
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import { authenticate } from "./actions";
-export default async function Login({searchParams}:{searchParams:Promise<Record<string,string>>}){const q=await searchParams;return <main className="login-page"><section className="login-art"><div><div className="mark">خ</div><h1>Urus khairat dengan lebih teratur dan telus.</h1><p>Satu pusat maklumat untuk keahlian, kutipan yuran, resit dan perkhidmatan ahli Kariah Masjid Tengah.</p></div><small>Persatuan Khairat Kematian Kariah Masjid Tengah</small></section><section className="login-box"><form className="form" action={authenticate}><h2>Selamat kembali</h2><p>Log masuk untuk mengurus sistem persatuan.</p>{q.error&&<div className="error">{q.error}</div>}{q.success&&<div className="success">{q.success}</div>}<div className="field"><label>Nama penuh (untuk pendaftaran)</label><input name="name" placeholder="Nama seperti kad pengenalan" /></div><div className="field"><label>Alamat e-mel</label><input type="email" name="email" required placeholder="nama@email.com" /></div><div className="field"><label>Kata laluan</label><input type="password" name="password" required minLength={8} placeholder="Sekurang-kurangnya 8 aksara" /></div><button className="btn" type="submit" name="intent" value="login">Log Masuk</button><div className="switch">Akaun pertama akan menjadi Super Admin. <button type="submit" name="intent" value="signup">Daftar Super Admin</button></div></form></section></main>}
+
+export default async function Login({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
+  const q = await searchParams;
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) redirect("/");
+
+  return (
+    <main className="login-page">
+      <section className="login-art">
+        <div>
+          <div className="mark">خ</div>
+          <h1>Urus khairat dengan lebih teratur dan telus.</h1>
+          <p>Satu pusat maklumat untuk keahlian, kutipan yuran, resit dan perkhidmatan ahli Kariah Masjid Tengah.</p>
+        </div>
+        <small>Persatuan Khairat Kematian Kariah Masjid Tengah</small>
+      </section>
+      <section className="login-box">
+        <form className="form" action={authenticate}>
+          <h2>Selamat kembali</h2>
+          <p>Log masuk menggunakan akaun yang telah didaftarkan oleh pentadbir sistem.</p>
+          {q.error && <div className="error" role="alert">{q.error}</div>}
+          <div className="field">
+            <label htmlFor="email">Alamat e-mel</label>
+            <input id="email" type="email" name="email" required autoComplete="email" autoFocus placeholder="nama@email.com" />
+          </div>
+          <div className="field">
+            <label htmlFor="password">Kata laluan</label>
+            <input id="password" type="password" name="password" required autoComplete="current-password" placeholder="Masukkan kata laluan" />
+          </div>
+          <button className="btn" type="submit">Log Masuk</button>
+          <p className="login-help">Hubungi pentadbir sistem jika anda terlupa kata laluan atau memerlukan akaun baharu.</p>
+        </form>
+      </section>
+    </main>
+  );
+}
