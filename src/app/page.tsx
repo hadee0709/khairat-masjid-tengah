@@ -92,10 +92,10 @@ export default async function Dashboard() {
             <ShieldCheck size={19} />
             <span>Pengguna Sistem</span>
           </a>
-          <a href="#konfigurasi">
+          <Link href="/reports">
             <Settings size={19} />
-            <span>Konfigurasi</span>
-          </a>
+            <span>Laporan & Analitik</span>
+          </Link>
         </nav>
         <div className="side-foot">
           <form action={logout}>
@@ -221,10 +221,10 @@ export default async function Dashboard() {
                 <Search size={19} color="var(--green)" />
                 Cari ahli
               </Link>
-              <a className="action" href="#laporan">
+              <Link className="action" href="/reports">
                 <FileText size={19} color="var(--green)" />
                 Jana laporan
-              </a>
+              </Link>
             </div>
           </div>
         </section>
