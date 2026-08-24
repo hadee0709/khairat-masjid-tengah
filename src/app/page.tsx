@@ -108,6 +108,10 @@ export default async function Dashboard() {
             <ShieldCheck size={19} />
             <span>Audit Trail</span>
           </Link>
+          <Link href="/import">
+            <FileText size={19} />
+            <span>Import Data</span>
+          </Link>
         </nav>
         <div className="side-foot">
           <form action={logout}>
