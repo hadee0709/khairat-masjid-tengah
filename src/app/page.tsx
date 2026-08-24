@@ -76,6 +76,10 @@ export default async function Dashboard() {
             <Users size={19} />
             <span>Pengurusan Ahli</span>
           </Link>
+          <Link href="/portal">
+            <UserRoundSearch size={19} />
+            <span>Portal Ahli</span>
+          </Link>
           <Link href="/payments">
             <ReceiptText size={19} />
             <span>Yuran & Ledger</span>
