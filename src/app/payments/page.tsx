@@ -146,6 +146,7 @@ export default async function Page({
                     <th>Rujukan</th>
                     <th>Jumlah</th>
                     <th>Status</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -172,6 +173,14 @@ export default async function Page({
                         >
                           {x.voided_at ? "Dibatalkan" : "Diterima"}
                         </span>
+                      </td>
+                      <td>
+                        <Link
+                          className="table-link"
+                          href={`/payments/${x.id}/receipt`}
+                        >
+                          Resit
+                        </Link>
                       </td>
                     </tr>
                   ))}
