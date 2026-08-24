@@ -1,0 +1,24 @@
+.dependent-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+.dependent-form input,
+.dependent-form select,
+.dependent-form textarea {
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+}
+.dependent-form .field {
+  margin: 10px 0;
+}
+@media (max-width: 700px) {
+  .dependent-form {
+    grid-template-columns: 1fr;
+  }
+  .full-field {
+    grid-column: auto;
+  }
+}
