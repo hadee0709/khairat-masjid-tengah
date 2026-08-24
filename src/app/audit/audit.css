@@ -1,0 +1,50 @@
+.audit-filter {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 150px 210px 140px 140px auto;
+  gap: 10px;
+  background: white;
+  border: 1px solid var(--line);
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+.audit-filter select,
+.audit-filter > input {
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+}
+.audit-filter code,
+.table code {
+  font-size: 11px;
+}
+.table details summary {
+  cursor: pointer;
+  color: var(--green);
+  font-weight: 700;
+}
+.table details pre {
+  max-width: 280px;
+  white-space: pre-wrap;
+  background: #f5f8f6;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+@media (max-width: 1000px) {
+  .audit-filter {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .audit-filter .search-field {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 600px) {
+  .audit-filter {
+    grid-template-columns: 1fr;
+  }
+  .audit-filter .search-field {
+    grid-column: auto;
+  }
+}
