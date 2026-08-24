@@ -1,0 +1,103 @@
+.import-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.import-results > div {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+.import-results strong {
+  font-size: 25px;
+}
+.result-good {
+  color: var(--green);
+}
+.result-warn {
+  color: #9a6b14;
+}
+.result-bad {
+  color: #a63d35;
+}
+.import-card {
+  padding: 0;
+}
+.import-step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  padding: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.import-step > span {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: white;
+  font-weight: 800;
+}
+.import-step h2,
+.column-guide h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+.import-step p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.inline-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.import-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.import-form input {
+  padding: 12px;
+  border: 1px dashed var(--green2);
+  border-radius: 9px;
+  background: var(--mint);
+  flex: 1;
+}
+.column-guide {
+  margin-top: 16px;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 0;
+}
+.guide-grid code,
+.guide-grid span {
+  padding: 9px;
+  border-bottom: 1px solid #edf1ef;
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .import-results {
+    grid-template-columns: 1fr;
+  }
+  .import-form {
+    display: grid;
+  }
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .guide-grid code {
+    border-bottom: 0;
+    padding-bottom: 2px;
+  }
+  .guide-grid span {
+    padding-top: 2px;
+  }
+}
