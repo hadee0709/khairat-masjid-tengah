@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowLeft, ShieldCheck, Users, Search } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Users, Search, UserPlus } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import { updateUser } from "./actions";
+import { createUser, updateUser } from "./actions";
 const roles: Record<string, string> = {
   super_admin: "Super Admin",
   admin: "Pentadbir",
@@ -61,6 +61,21 @@ export default async function Page({
         </header>
         {f.success && <div className="success">{f.success}</div>}
         {f.error && <div className="error">{f.error}</div>}
+        {actor.role === "super_admin" && (
+          <section className="card create-user-card">
+            <div className="create-user-intro">
+              <div className="user-avatar"><UserPlus size={20} /></div>
+              <div><h2>Tambah pengguna baharu</h2><p>Cipta akaun dan tetapkan peranan awal pengguna.</p></div>
+            </div>
+            <form action={createUser} className="create-user-form">
+              <div className="field"><label>Nama penuh</label><input name="full_name" required placeholder="Nama pengguna" /></div>
+              <div className="field"><label>Alamat e-mel</label><input type="email" name="email" required autoComplete="off" placeholder="nama@email.com" /></div>
+              <div className="field"><label>Kata laluan sementara</label><input type="password" name="password" required minLength={10} autoComplete="new-password" placeholder="Minimum 10 aksara" /></div>
+              <div className="field"><label>Peranan</label><select name="role" defaultValue="member">{Object.entries(roles).filter(([v]) => v !== "super_admin").map(([v,l]) => <option key={v} value={v}>{l}</option>)}</select></div>
+              <button className="btn-filter" type="submit"><UserPlus size={17} /> Tambah pengguna</button>
+            </form>
+          </section>
+        )}
         <form className="filter-card">
           <div className="search-field">
             <Search size={18} />
@@ -92,7 +107,7 @@ export default async function Page({
               <strong>{rows.length}</strong> pengguna
             </div>
             <small>
-              Akaun baharu didaftarkan melalui Supabase Authentication
+              {actor.role === "super_admin" ? "Super Admin boleh menambah pengguna dan menetapkan peranan." : "Peranan Super Admin diperlukan untuk menambah pengguna."}
             </small>
           </div>
           {error ? (
