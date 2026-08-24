@@ -1,17 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { logout } from "./actions";
 import {
   Users,
   Wallet,
   ReceiptText,
   MessageSquare,
-  LayoutDashboard,
-  UserRoundSearch,
-  Settings,
-  ShieldCheck,
-  LogOut,
   UserPlus,
   BadgeDollarSign,
   FileText,
@@ -58,86 +52,6 @@ export default async function Dashboard() {
   const total = (payments || []).reduce((n, p) => n + Number(p.amount), 0),
     bars = [38, 56, 45, 72, 62, 84, 68, 90, 74, 82, 65, 42];
   return (
-    <div className="shell">
-      <aside className="side">
-        <div className="brand">
-          <div className="mark">خ</div>
-          <div>
-            <strong>Khairat Masjid Tengah</strong>
-            <small>Sistem Maklumat Persatuan</small>
-          </div>
-        </div>
-        <nav className="nav">
-          <Link href="/">
-            <LayoutDashboard size={19} />
-            <span>Dashboard</span>
-          </Link>
-          <Link href="/members">
-            <Users size={19} />
-            <span>Pengurusan Ahli</span>
-          </Link>
-          <Link href="/portal">
-            <UserRoundSearch size={19} />
-            <span>Portal Ahli</span>
-          </Link>
-          <Link href="/notifications">
-            <MessageSquare size={19} />
-            <span>Notifikasi</span>
-          </Link>
-          <Link href="/payments">
-            <ReceiptText size={19} />
-            <span>Yuran & Ledger</span>
-          </Link>
-          <Link href="/claims">
-            <MessageSquare size={19} />
-            <span>Tuntutan Khairat</span>
-          </Link>
-          <Link href="/feedback">
-            <MessageSquare size={19} />
-            <span>Maklum Balas</span>
-          </Link>
-          <Link href="/dependents">
-            <UserRoundSearch size={19} />
-            <span>Tanggungan Ahli</span>
-          </Link>
-          <Link href="/users">
-            <ShieldCheck size={19} />
-            <span>Pengguna Sistem</span>
-          </Link>
-          <Link href="/reports">
-            <Settings size={19} />
-            <span>Laporan & Analitik</span>
-          </Link>
-          <Link href="/settings">
-            <Settings size={19} />
-            <span>Konfigurasi</span>
-          </Link>
-          <Link href="/audit">
-            <ShieldCheck size={19} />
-            <span>Audit Trail</span>
-          </Link>
-          <Link href="/import">
-            <FileText size={19} />
-            <span>Import Data</span>
-          </Link>
-        </nav>
-        <div className="side-foot">
-          <form action={logout}>
-            <button
-              style={{
-                background: "none",
-                border: 0,
-                color: "inherit",
-                display: "flex",
-                gap: 10,
-                cursor: "pointer",
-              }}
-            >
-              <LogOut size={16} /> Log keluar
-            </button>
-          </form>
-        </div>
-      </aside>
       <main className="main">
         <header className="top">
           <div>
@@ -293,6 +207,5 @@ export default async function Dashboard() {
           )}
         </section>
       </main>
-    </div>
   );
 }
