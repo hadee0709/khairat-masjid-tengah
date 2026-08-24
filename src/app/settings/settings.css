@@ -1,0 +1,81 @@
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.config-section {
+  padding: 0;
+  overflow: hidden;
+}
+.config-title {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  color: var(--green);
+  border-bottom: 1px solid var(--line);
+}
+.config-title h2 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+.config-title p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.config-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+  padding: 16px 20px;
+}
+.config-form .field {
+  margin: 0;
+}
+.config-form input,
+.config-row input,
+.config-row select {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  width: 100%;
+}
+.new-row {
+  grid-template-columns: 1fr auto;
+}
+.config-list {
+  border-top: 1px solid var(--line);
+}
+.config-row {
+  display: grid;
+  grid-template-columns: 1fr 120px auto;
+  gap: 9px;
+  padding: 11px 20px;
+  border-bottom: 1px solid #edf1ef;
+}
+.category-row {
+  grid-template-columns: 1fr 100px 100px auto;
+}
+.config-row button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--mint);
+  color: var(--green);
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .config-form,
+  .new-row,
+  .config-row,
+  .category-row {
+    grid-template-columns: 1fr;
+  }
+}
