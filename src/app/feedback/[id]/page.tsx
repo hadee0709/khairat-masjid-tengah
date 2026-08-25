@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, MessageSquare } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { updateFeedback } from "../actions";
+import { adminDelete } from "@/app/actions/admin-delete";
+import { DeleteButton } from "@/app/components/delete-button";
 const labels: Record<string, string> = {
   new: "Baharu",
   in_progress: "Dalam tindakan",
@@ -107,6 +109,7 @@ export default async function Page({
             <button className="btn-inline">Kemas Kini Kes</button>
           </div>
         </form>
+        <div className="danger-zone"><DeleteButton action={adminDelete} id={id} entity="feedback" label="Padam kes" message={`Padam kes ${f.reference_no} secara kekal?`}/></div>
       </div>
     </main>
   );
