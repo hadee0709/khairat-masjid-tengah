@@ -7,6 +7,8 @@ import {
   markAsRead,
   sendAnnouncement,
 } from "./actions";
+import { adminDelete } from "@/app/actions/admin-delete";
+import { DeleteButton } from "@/app/components/delete-button";
 const types: Record<string, string> = {
   general: "Umum",
   payment_reminder: "Peringatan yuran",
@@ -153,6 +155,7 @@ export default async function Page({
                     </button>
                   </form>
                 )}
+                {staff && <DeleteButton action={adminDelete} id={n.id} entity="notification" label="Padam" message={`Padam notifikasi ${n.title}?`}/>} 
               </article>
             ))
           ) : (
