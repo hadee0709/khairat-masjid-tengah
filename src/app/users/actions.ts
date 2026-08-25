@@ -83,3 +83,10 @@ export async function updateUser(f: FormData) {
     `/users?success=${encodeURIComponent("Akses pengguna berjaya dikemas kini.")}`,
   );
 }
+
+export async function deleteUser(f: FormData) {
+  const s=await createClient();const{data:{user}}=await s.auth.getUser();if(!user)redirect("/login");
+  const id=v(f,"id");const{error}=await s.functions.invoke("delete-system-user",{body:{id}});
+  if(error){let message="Pengguna tidak dapat dipadam.";try{const body=await error.context?.json();if(body?.error)message=body.error}catch{}redirect(`/users?error=${encodeURIComponent(message)}`)}
+  revalidatePath("/users");redirect(`/users?success=${encodeURIComponent("Pengguna berjaya dipadam.")}`);
+}
