@@ -8,6 +8,8 @@ import {
   Wallet,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { adminDelete } from "@/app/actions/admin-delete";
+import { DeleteButton } from "@/app/components/delete-button";
 const money = new Intl.NumberFormat("ms-MY", {
     style: "currency",
     currency: "MYR",
@@ -146,7 +148,7 @@ export default async function Page({
                     <th>Rujukan</th>
                     <th>Jumlah</th>
                     <th>Status</th>
-                    <th></th>
+                    <th>Tindakan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -181,6 +183,7 @@ export default async function Page({
                         >
                           Resit
                         </Link>
+                        <DeleteButton action={adminDelete} id={x.id} entity="payment" label="Padam" message={`Padam transaksi ${x.receipt_no} secara kekal?`} />
                       </td>
                     </tr>
                   ))}
