@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Search, UserPlus, UsersRound } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { adminDelete } from "@/app/actions/admin-delete";
+import { DeleteButton } from "@/app/components/delete-button";
 const rel: Record<string, string> = {
     spouse: "Pasangan",
     child: "Anak",
@@ -115,6 +117,7 @@ export default async function Page({
                     <th>Tarikh lahir</th>
                     <th>Telefon</th>
                     <th>Kelayakan</th>
+                    <th>Tindakan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -144,6 +147,7 @@ export default async function Page({
                           {status[x.eligibility_status]}
                         </span>
                       </td>
+                      <td><DeleteButton action={adminDelete} id={x.id} entity="dependent" label="Padam" message={`Padam tanggungan ${x.full_name}?`}/></td>
                     </tr>
                   ))}
                 </tbody>
