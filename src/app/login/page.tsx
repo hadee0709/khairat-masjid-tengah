@@ -1,40 +1,11 @@
 import { redirect } from "next/navigation";
+import { LockKeyhole, Mail, ShieldCheck, UsersRound, WalletCards } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { authenticate } from "./actions";
 
-export default async function Login({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
-  const q = await searchParams;
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) redirect("/");
+function MosqueGraphic(){return <svg className="mosque-graphic" viewBox="0 0 760 360" role="img" aria-label="Ilustrasi Masjid Tengah dan komuniti kariah"><defs><linearGradient id="dome" x1="0" x2="1"><stop stopColor="#f5dca6"/><stop offset="1" stopColor="#c99a43"/></linearGradient></defs><circle cx="380" cy="126" r="76" fill="#ffffff0a"/><path d="M306 170c5-55 33-88 74-105 41 17 69 50 74 105z" fill="url(#dome)"/><path d="M374 63h12v-18h-12zm6-39c14 12 18 27 0 41-12-13-11-28 0-41z" fill="#f5dca6"/><path d="M247 142h36v152h-36zm230 0h36v152h-36z" fill="#edf8f3"/><path d="M241 142c3-26 11-43 24-57 13 14 21 31 24 57zm230 0c3-26 11-43 24-57 13 14 21 31 24 57z" fill="#f5dca6"/><path d="M281 165h198v129H281z" fill="#edf8f3"/><path d="M336 294v-63c0-25 18-43 44-43s44 18 44 43v63z" fill="#0d5844"/><path d="M195 294h370" stroke="#f5dca6" strokeWidth="4" strokeLinecap="round"/><g fill="#ffffff22"><circle cx="170" cy="264" r="22"/><circle cx="590" cy="264" r="22"/><circle cx="115" cy="278" r="15"/><circle cx="645" cy="278" r="15"/></g><g fill="#d8eee6"><path d="M143 295c3-28 15-43 27-43s24 15 27 43zM568 295c3-28 15-43 22-43 15 0 25 15 27 43zM97 295c2-19 10-29 18-29s16 10 18 29zM627 295c2-19 10-29 18-29s16 10 18 29z"/></g></svg>}
 
-  return (
-    <main className="login-page">
-      <section className="login-art">
-        <div>
-          <div className="mark">خ</div>
-          <h1>Urus khairat dengan lebih teratur dan telus.</h1>
-          <p>Satu pusat maklumat untuk keahlian, kutipan yuran, resit dan perkhidmatan ahli Kariah Masjid Tengah.</p>
-        </div>
-        <small>Persatuan Khairat Kematian Kariah Masjid Tengah</small>
-      </section>
-      <section className="login-box">
-        <form className="form" action={authenticate}>
-          <h2>Selamat kembali</h2>
-          <p>Log masuk menggunakan akaun yang telah didaftarkan oleh pentadbir sistem.</p>
-          {q.error && <div className="error" role="alert">{q.error}</div>}
-          <div className="field">
-            <label htmlFor="email">Alamat e-mel</label>
-            <input id="email" type="email" name="email" required autoComplete="email" autoFocus placeholder="nama@email.com" />
-          </div>
-          <div className="field">
-            <label htmlFor="password">Kata laluan</label>
-            <input id="password" type="password" name="password" required autoComplete="current-password" placeholder="Masukkan kata laluan" />
-          </div>
-          <button className="btn" type="submit">Log Masuk</button>
-          <p className="login-help">Hubungi pentadbir sistem jika anda terlupa kata laluan atau memerlukan akaun baharu.</p>
-        </form>
-      </section>
-    </main>
-  );
+export default async function Login({searchParams}:{searchParams:Promise<Record<string,string>>}){
+ const q=await searchParams,supabase=await createClient();const {data:{user}}=await supabase.auth.getUser();if(user)redirect("/");
+ return <main className="login-page login-refresh"><section className="login-art"><div className="login-pattern"/><div className="login-brand"><span className="login-mark">خ</span><div><strong>Khairat Masjid Tengah</strong><small>Sistem Maklumat Persatuan</small></div></div><div className="login-story"><div className="login-kicker"><ShieldCheck size={15}/> Pengurusan khairat yang amanah</div><h1>Menjaga kebajikan kariah, dengan lebih teratur.</h1><p>Satu pusat maklumat untuk keahlian, kutipan yuran, resit digital dan perkhidmatan komuniti.</p><MosqueGraphic/><div className="login-benefits"><span><UsersRound size={17}/> Rekod ahli tersusun</span><span><WalletCards size={17}/> Bayaran lebih telus</span></div></div><small className="login-copyright">Persatuan Khairat Kematian Kariah Masjid Tengah</small></section><section className="login-box"><div className="login-mobile-brand"><span className="login-mark">خ</span><strong>Khairat Masjid Tengah</strong></div><form className="form login-form" action={authenticate}><div className="login-form-icon"><LockKeyhole size={22}/></div><p className="login-eyebrow">PORTAL PENGURUSAN</p><h2>Selamat kembali</h2><p>Log masuk menggunakan akaun yang didaftarkan oleh pentadbir.</p>{q.error&&<div className="error" role="alert">{q.error}</div>}<div className="field login-field"><label htmlFor="email">Alamat e-mel</label><div><Mail size={18}/><input id="email" type="email" name="email" required autoComplete="email" autoFocus placeholder="nama@email.com"/></div></div><div className="field login-field"><label htmlFor="password">Kata laluan</label><div><LockKeyhole size={18}/><input id="password" type="password" name="password" required autoComplete="current-password" placeholder="Masukkan kata laluan"/></div></div><button className="btn login-button" type="submit">Log Masuk <span>→</span></button><p className="login-help">Hubungi pentadbir sistem jika anda terlupa kata laluan atau memerlukan akaun baharu.</p></form><div className="login-security"><ShieldCheck size={15}/> Sambungan dilindungi dan akses dikawal mengikut peranan.</div></section></main>;
 }
