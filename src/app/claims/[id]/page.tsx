@@ -4,6 +4,8 @@ import { ArrowLeft, ClipboardCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { updateClaimStatus } from "../actions";
 import { uploadClaimDocument } from "../documents/actions";
+import { adminDelete } from "@/app/actions/admin-delete";
+import { DeleteButton } from "@/app/components/delete-button";
 const money = new Intl.NumberFormat("ms-MY", {
     style: "currency",
     currency: "MYR",
@@ -103,6 +105,7 @@ export default async function Page({
           </select>
           <button className="btn-inline">Kemas Kini Status</button>
         </form>
+        <div className="danger-zone"><DeleteButton action={adminDelete} id={id} entity="claim" label="Padam tuntutan" message={`Padam tuntutan ${c.reference_no} secara kekal?`}/></div>
         <section className="card documents-card">
           <div className="card-head">
             <div>
