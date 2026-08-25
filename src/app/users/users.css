@@ -11,12 +11,13 @@
 }
 .user-card {
   display: grid;
-  grid-template-columns: 46px 1.4fr 1fr 1fr auto auto;
+  grid-template-columns: 46px 1.3fr .9fr .8fr 1.1fr auto auto auto;
   align-items: end;
   gap: 12px;
   padding: 16px 20px;
   border-top: 1px solid var(--line);
 }
+.reset-password-button{padding:10px 12px;white-space:nowrap}.password-reset-field input{min-width:150px}
 .user-card .field {
   margin: 0;
 }
