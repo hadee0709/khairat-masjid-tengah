@@ -90,3 +90,12 @@ export async function deleteUser(f: FormData) {
   if(error){let message="Pengguna tidak dapat dipadam.";try{const body=await error.context?.json();if(body?.error)message=body.error}catch{}redirect(`/users?error=${encodeURIComponent(message)}`)}
   revalidatePath("/users");redirect(`/users?success=${encodeURIComponent("Pengguna berjaya dipadam.")}`);
 }
+
+export async function resetUserPassword(f: FormData) {
+  const s=await createClient();const{data:{user}}=await s.auth.getUser();if(!user)redirect("/login");
+  const id=v(f,"id"),password=v(f,"new_password");
+  if(password.length<10)redirect(`/users?error=${encodeURIComponent("Kata laluan baharu mesti sekurang-kurangnya 10 aksara.")}`);
+  const{error}=await s.functions.invoke("reset-system-user-password",{body:{id,password}});
+  if(error){let message="Kata laluan tidak dapat ditetapkan semula.";try{const body=await error.context?.json();if(body?.error)message=body.error}catch{}redirect(`/users?error=${encodeURIComponent(message)}`)}
+  revalidatePath("/users");redirect(`/users?success=${encodeURIComponent("Kata laluan pengguna berjaya ditetapkan semula.")}`);
+}
