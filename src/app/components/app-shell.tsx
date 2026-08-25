@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
+  Activity,
   Bell,
   FileSpreadsheet,
   FileText,
@@ -38,6 +39,7 @@ const menu = [
   { href: "/audit", label: "Jejak Audit", icon: History },
   { href: "/import", label: "Import Data", icon: Import },
   { href: "/settings", label: "Konfigurasi", icon: Settings },
+  { href: "/platform-usage", label: "Penggunaan Platform", icon: Activity },
 ] as const;
 
 function isActive(pathname: string, href: string) {
