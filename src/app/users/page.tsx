@@ -2,7 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, ShieldCheck, Users, Search, UserPlus } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import { createUser, updateUser } from "./actions";
+import { createUser, deleteUser, updateUser } from "./actions";
+import { DeleteButton } from "@/app/components/delete-button";
 const roles: Record<string, string> = {
   super_admin: "Super Admin",
   admin: "Pentadbir",
@@ -151,6 +152,7 @@ export default async function Page({
                     </select>
                   </div>
                   <button className="btn-filter">Simpan</button>
+                  {actor.role === "super_admin" && x.id !== user.id && x.role !== "super_admin" && <DeleteButton action={deleteUser} id={x.id} label="Padam" message={`Padam akaun ${x.full_name} secara kekal?`}/>} 
                   <div className="user-meta">
                     <span
                       className={`pill ${x.active ? "" : "status-inactive"}`}
